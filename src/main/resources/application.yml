@@ -1,0 +1,74 @@
+server:
+  servlet:
+    context-path: /
+  port: 9080
+  compression:
+    mime-types:
+      - application/json
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:financeiro;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;
+    username: user123
+    password: pwd1234
+    platform: h2
+    continue-on-error: true
+
+  application:
+    name: financeiro-ms
+  jpa:
+    open-in-view: false
+    show-sql: true
+    format-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50
+    cache:
+      type: redis
+    redis:
+      host: localhost
+      port: 6379
+    
+application:
+  async:
+    corePoolSize: 20
+    maxPoolSize: 40
+    queueCapacity: 60
+
+  locale:
+    country: BR
+    language: pt
+
+info:
+  app:
+    name: ${spring.application.name}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude:
+          - scheduledtasks
+          - heapdump
+          - mappings
+          - env
+          - flyway
+          - configprops
+          - shutdown
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org:
+      apache: WARN
+    root: info
