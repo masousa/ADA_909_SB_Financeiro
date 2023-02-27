@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import tech.ada.exemplos.salao.beleza.payloads.request.PagamentoFornecedorRequest;
+import tech.ada.exemplos.salao.beleza.payloads.response.RelatorioFornecedor;
 import tech.ada.exemplos.salao.beleza.servico.SalvarPagamentoService;
 import tech.ada.exemplos.salao.beleza.servico.SomaPedidosPorFornecedorService;
 
@@ -24,7 +25,7 @@ public class PagamentosController {
     }
 
     @GetMapping(path = "/relatorio/{idFornecedor}")
-    public double getRelatorioFornecedor(@PathVariable String idFornecedor){
+    public RelatorioFornecedor getRelatorioFornecedor(@PathVariable String idFornecedor){
         return somaPedidosPorFornecedorService.execute(idFornecedor);
     }
 }

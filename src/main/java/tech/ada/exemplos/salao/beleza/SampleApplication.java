@@ -9,7 +9,6 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @SpringBootApplication
 @OpenAPIDefinition(info = @Info(title = "Sample api", version = "1.0", description = "Sample API"))
-@EnableCaching
 public class SampleApplication {
 
 	public static void main(String[] args) {
