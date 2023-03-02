@@ -14,7 +14,7 @@ public class PagamentoFornecedorListener {
 
     private final SalvarPagamentoService salvarPagamentoService;
 
-    @KafkaListener(topics = "${businness.mensagem.entrada.pagamento_fornecedor}", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${business.mensagem.entrada.pagamento_fornecedor}", groupId = "${spring.kafka.consumer.group-id}")
     public void receive(PagamentoFornecedorRequest request){
         log.info("Recebendo uma nova requisição para pagamento do fornecedor {}", request);
         salvarPagamentoService.execute(request);

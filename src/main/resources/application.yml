@@ -35,6 +35,19 @@ spring:
     redis:
       host: localhost
       port: 6379
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: passw123
+    cache:
+      connection:
+        mode: CONNECTION
+      channel:
+        size: 50
+        checkout-timeout: 10000
+
   kafka:
     consumer:
       bootstrap-servers: 127.0.0.1:29092
@@ -42,6 +55,7 @@ spring:
       #      value-serializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: tech.ada.exemplos.salao.beleza.config.PagamentoFornecedorDeserializer
       group-id: group_id
+
 application:
   async:
     corePoolSize: 20
@@ -79,7 +93,11 @@ logging:
       apache: WARN
     root: info
 
-businness:
+business:
   mensagem:
     entrada:
       pagamento_fornecedor: pagamento_fornecedor-topic
+
+  message:
+    queue:
+      pagamento_fornecedor: financeiro_pagamento_fornecedor
