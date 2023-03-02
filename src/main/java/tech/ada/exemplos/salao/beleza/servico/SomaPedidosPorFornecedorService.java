@@ -16,16 +16,14 @@ import java.util.List;
 public class SomaPedidosPorFornecedorService {
     private final PagamentoRepository pagamentoRepository;
     @Cacheable(cacheNames = "rlfornecedor", key ="#identificadorFornecedor" )
-    public double execute(String identificadorFornecedor){
+    public RelatorioFornecedor execute(String identificadorFornecedor){
 
         log.info("Relatorio do fornecedor invocado");
         List<Pagamento> pagamentos = pagamentoRepository.findByFornecedorIdentificador(identificadorFornecedor);
-
-
         RelatorioFornecedor relatorioFornecedor = new RelatorioFornecedor();
         relatorioFornecedor.setIdentificador(identificadorFornecedor);
-        relatorioFornecedor.setValor(19.0);
-        return pagamentos.stream().flatMap(pagamento -> pagamento.getItems().stream())
-                .map(item -> item.getQuantidade()*item.getPreco()).reduce(0.0, Double::sum);
+        relatorioFornecedor.setValor(pagamentos.stream().flatMap(pagamento -> pagamento.getItems().stream())
+                .map(item -> item.getQuantidade()*item.getPreco()).reduce(0.0, Double::sum));
+        return relatorioFornecedor;
     }
 }
