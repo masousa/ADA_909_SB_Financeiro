@@ -101,3 +101,6 @@ business:
   message:
     queue:
       pagamento_fornecedor: financeiro_pagamento_fornecedor
+
+  estoque:
+    url: http://localhost:9082/produto/add
