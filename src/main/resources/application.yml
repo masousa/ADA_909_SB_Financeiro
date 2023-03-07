@@ -98,6 +98,7 @@ business:
     entrada:
       pagamento_fornecedor: pagamento_fornecedor-topic
 
+
   message:
     queue:
       pagamento_fornecedor: financeiro_pagamento_fornecedor

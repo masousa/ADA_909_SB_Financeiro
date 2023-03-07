@@ -15,6 +15,7 @@ public class EstoqueClient {
     @Value("${business.estoque.url}")
     private String requestAddress;
 
+
     @Async
     public void solicitarCadastroEstoque(EstoqueRequest estoqueRequest){
         WebClient webClient = WebClient.create();
