@@ -1,0 +1,94 @@
+server:
+  servlet:
+    context-path: /
+  port: 9081
+  compression:
+    mime-types:
+      - application/json
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:fatura-DB;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE;
+    username: user123
+    password: pwd1234
+    platform: h2
+    continue-on-error: true
+
+  application:
+    name: fatura-ms
+  jpa:
+    open-in-view: false
+    show-sql: true
+    format-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: passw123
+    cache:
+      connection:
+        mode: CONNECTION
+      channel:
+        size: 50
+        checkout-timeout: 10000
+
+  kafka:
+    consumer:
+      bootstrap-servers: 127.0.0.1:29092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: group_id
+    
+application:
+  async:
+    corePoolSize: 20
+    maxPoolSize: 40
+    queueCapacity: 60
+
+  locale:
+    country: BR
+    language: pt
+
+info:
+  app:
+    name: ${spring.application.name}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude:
+          - scheduledtasks
+          - heapdump
+          - mappings
+          - env
+          - flyway
+          - configprops
+          - shutdown
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org:
+      apache: WARN
+    root: info
+
+business:
+  in:
+    fatura: ENVIAR_NOVO_PACOTE
+  out:
+    retorno-fatura: RETORNO_RECEBIMENTO_PACOTE
