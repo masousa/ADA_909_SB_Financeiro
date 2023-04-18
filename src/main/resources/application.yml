@@ -49,6 +49,12 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       group-id: group_id
+
+    cache:
+      type: redis
+    redis:
+      host: localhost
+      port: 6379
     
 application:
   async:

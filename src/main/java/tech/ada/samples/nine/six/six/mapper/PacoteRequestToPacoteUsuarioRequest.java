@@ -14,7 +14,7 @@ public class PacoteRequestToPacoteUsuarioRequest {
         pacoteUsuarioRequest.setStatus(StatusSolicitacao.APROVADO);
         pacoteUsuarioRequest.setIdUsuario(contratoRequest.getUsuarioId());
         pacoteUsuarioRequest.setIdPacote(pacoteRequest.getIdPacote());
-        pacoteUsuarioRequest.setValor(pacoteUsuarioRequest.getValor());
+        pacoteUsuarioRequest.setValor(pacoteRequest.getValorPacote());
         return pacoteUsuarioRequest;
     }
 }
